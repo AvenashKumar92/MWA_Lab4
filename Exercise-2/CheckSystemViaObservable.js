@@ -1,5 +1,5 @@
 const os=require('os');
-const Rx=require('@reactivex/rxjs');
+const {from}=require('rxjs');
 
 function checkSystem(){
     return new Promise(function(resolve, reject){
@@ -17,10 +17,6 @@ function checkSystem(){
         }
     })
 }
-Rx.Observable.fromPromise(checkSystem)
+from(checkSystem())
     .subscribe((e)=>console.log(e),
-                (err)=>console.log(err));
-    
-
-//checkSystem().then(data=>console.log(data))
-  //          .catch(err=>console.error(err));
+                (err)=>console.error(err));
